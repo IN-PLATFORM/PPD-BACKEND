@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-public class AngleChange extends BaseTimeEntity {
+public class ArmAngle extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="angle_idx")
+    @Column(name="arm_idx")
     private Long idx;
 
     private Float actual_value;
@@ -27,6 +27,6 @@ public class AngleChange extends BaseTimeEntity {
     private ResultType resultType; // 각 특성의 결과상태(정상/비정상)을 관리할 Enum class
 
     // 읽기 전용
-    @OneToOne(mappedBy = "angleChange") // Joint 엔티티에 있는 angleChange 필드와 매핑되었다.
+    @OneToOne(mappedBy = "armAngle") // Joint 엔티티에 있는 angleChange 필드와 매핑되었다.
     private Joint joint;
 }
