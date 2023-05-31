@@ -11,6 +11,7 @@ import com.platform.ppdbackend.domain.user.enums.RoleType;
 import com.platform.ppdbackend.domain.user.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Setter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,12 +23,16 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table
+@Setter
+@Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class User extends BaseTimeEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="user_idx")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_idx")
     private Long idx;
 
     private String email;
@@ -62,5 +67,5 @@ public class User extends BaseTimeEntity {
         this.info = info;
         this.lastLoginDate = lastLoginDate;
     }
-
 }
+
