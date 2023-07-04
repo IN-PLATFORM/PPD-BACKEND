@@ -1,11 +1,10 @@
 package com.platform.ppdbackend.domain.service;
 
-import com.platform.ppdbackend.domain.user.Member;
 import com.platform.ppdbackend.domain.repository.UserRepository;
+import com.platform.ppdbackend.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,12 +28,12 @@ public class UserDetailService implements UserDetailsService {
     }
 
     // DB 에 User 값이 존재한다면 UserDetails 객체로 만들어서 리턴
-    private UserDetails createUserDetails(Member member) {
-        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(member.getAuthority().toString());
+    private UserDetails createUserDetails(User user) {
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getRoleType().toString());
 
         return new User(
-                String.valueOf(member.getId()),
-                member.getPassword(),
+                String.valueOf(user.getEmail()),
+                user.getPassword(),
                 Collections.singleton(grantedAuthority)
         );
     }

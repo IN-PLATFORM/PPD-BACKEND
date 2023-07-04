@@ -1,14 +1,14 @@
 package com.platform.ppdbackend.domain.service;
 
-import com.platform.ppdbackend.domain.dto.MemberRequestDto;
-import com.platform.ppdbackend.domain.dto.MemberResponseDto;
 import com.platform.ppdbackend.domain.dto.TokenDto;
 import com.platform.ppdbackend.domain.dto.TokenRequestDto;
-import com.platform.ppdbackend.domain.user.Member;
+import com.platform.ppdbackend.domain.dto.UserRequestDto;
+import com.platform.ppdbackend.domain.dto.UserResponseDto;
 import com.platform.ppdbackend.domain.user.RefreshToken;
 import com.platform.ppdbackend.domain.jwt.TokenProvider;
 import com.platform.ppdbackend.domain.repository.UserRepository;
 import com.platform.ppdbackend.domain.repository.RefreshTokenRepository;
+import com.platform.ppdbackend.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,17 +27,17 @@ public class AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
-    public MemberResponseDto signup(MemberRequestDto memberRequestDto) {
-        if (userRepository.existsByEmail(memberRequestDto.getEmail())) {
+    public UserResponseDto signup(UserRequestDto userRequestDto) {
+        if (userRepository.existsByEmail(userRequestDto.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");
         }
 
-        Member member = memberRequestDto.toMember(passwordEncoder);
-        return MemberResponseDto.of(userRepository.save(member));
+        User user = userRequestDto.toUser(passwordEncoder);
+        return UserResponseDto.of(userRepository.save(user));
     }
 
     @Transactional
-    public TokenDto login(MemberRequestDto memberRequestDto) {
+    public TokenDto login(UserRequestDto memberRequestDto) {
         // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
         UsernamePasswordAuthenticationToken authenticationToken = memberRequestDto.toAuthentication();
 

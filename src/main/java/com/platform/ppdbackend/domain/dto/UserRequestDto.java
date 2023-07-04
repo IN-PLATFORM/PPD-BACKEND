@@ -1,7 +1,8 @@
 package com.platform.ppdbackend.domain.dto;
 
-import com.platform.ppdbackend.domain.user.Authority;
-import com.platform.ppdbackend.domain.user.Member;
+import com.platform.ppdbackend.domain.user.enums.Authority;
+import com.platform.ppdbackend.domain.user.User;
+import com.platform.ppdbackend.domain.user.enums.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,16 +12,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberRequestDto {
+public class UserRequestDto {
 
     private String email;
     private String password;
 
-    public Member toMember(PasswordEncoder passwordEncoder) {
-        return Member.builder()
+    public User toUser(PasswordEncoder passwordEncoder) {
+        return User.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                .authority(Authority.ROLE_USER)
+                .roleType(RoleType.NORMAL)
                 .build();
     }
 

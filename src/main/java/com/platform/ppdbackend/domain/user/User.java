@@ -10,15 +10,16 @@ import com.platform.ppdbackend.domain.user.enums.InfoStatus;
 import com.platform.ppdbackend.domain.user.enums.RoleType;
 import com.platform.ppdbackend.domain.user.enums.UserStatus;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Setter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -28,7 +29,7 @@ import java.util.List;
 @Setter
 @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-public class User extends BaseTimeEntity {
+public class User extends BaseTimeEntity implements UserDetails  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,6 +67,39 @@ public class User extends BaseTimeEntity {
         this.gender = gender;
         this.info = info;
         this.lastLoginDate = lastLoginDate;
+    }
+
+    public <T> User(String valueOf, String password, Set<T> singleton) {
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }
 

@@ -1,5 +1,6 @@
 package com.platform.ppdbackend.domain.user;
 
+import com.platform.ppdbackend.domain.user.enums.Authority;
 import jakarta.persistence.*;
 import lombok.*;
 

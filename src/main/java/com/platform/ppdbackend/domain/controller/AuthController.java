@@ -1,9 +1,9 @@
 package com.platform.ppdbackend.domain.controller;
 
-import com.platform.ppdbackend.domain.dto.MemberRequestDto;
-import com.platform.ppdbackend.domain.dto.MemberResponseDto;
 import com.platform.ppdbackend.domain.dto.TokenDto;
 import com.platform.ppdbackend.domain.dto.TokenRequestDto;
+import com.platform.ppdbackend.domain.dto.UserRequestDto;
+import com.platform.ppdbackend.domain.dto.UserResponseDto;
 import com.platform.ppdbackend.domain.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +19,13 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<MemberResponseDto> signup(@RequestBody MemberRequestDto memberRequestDto) {
-        return ResponseEntity.ok(authService.signup(memberRequestDto));
+    public ResponseEntity<UserResponseDto> signup(@RequestBody UserRequestDto userRequestDto) {
+        return ResponseEntity.ok(authService.signup(userRequestDto));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> login(@RequestBody MemberRequestDto memberRequestDto) {
-        return ResponseEntity.ok(authService.login(memberRequestDto));
+    public ResponseEntity<TokenDto> login(@RequestBody UserRequestDto userRequestDto) {
+        return ResponseEntity.ok(authService.login(userRequestDto));
     }
 
     @PostMapping("/reissue")
