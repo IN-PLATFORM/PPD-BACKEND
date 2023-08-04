@@ -1,4 +1,4 @@
-package com.platform.ppdbackend.domain.jwt;
+package com.platform.ppdbackend.jwt;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;

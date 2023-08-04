@@ -1,4 +1,4 @@
-package com.platform.ppdbackend.domain.jwt;
+package com.platform.ppdbackend.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

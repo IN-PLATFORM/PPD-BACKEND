@@ -1,4 +1,4 @@
-package com.platform.ppdbackend.domain.controller;
+package com.platform.ppdbackend.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

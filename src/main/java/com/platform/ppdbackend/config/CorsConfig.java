@@ -1,4 +1,4 @@
-package com.platform.ppdbackend.domain.config;
+package com.platform.ppdbackend.config;
 
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
