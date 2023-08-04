@@ -1,7 +1,6 @@
 package com.platform.ppdbackend.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.platform.ppdbackend.domain.BaseTimeEntity;
 import com.platform.ppdbackend.domain.joint.Joint;
@@ -11,15 +10,10 @@ import com.platform.ppdbackend.domain.user.enums.RoleType;
 import com.platform.ppdbackend.domain.user.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -29,7 +23,7 @@ import java.util.Set;
 @Setter
 @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-public class User extends BaseTimeEntity implements UserDetails  {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,39 +61,6 @@ public class User extends BaseTimeEntity implements UserDetails  {
         this.gender = gender;
         this.info = info;
         this.lastLoginDate = lastLoginDate;
-    }
-
-    public <T> User(String valueOf, String password, Set<T> singleton) {
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 }
 

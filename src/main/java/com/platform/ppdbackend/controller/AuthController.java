@@ -1,10 +1,10 @@
-package com.platform.ppdbackend.domain.controller;
+package com.platform.ppdbackend.controller;
 
 import com.platform.ppdbackend.domain.dto.TokenDto;
 import com.platform.ppdbackend.domain.dto.TokenRequestDto;
 import com.platform.ppdbackend.domain.dto.UserRequestDto;
 import com.platform.ppdbackend.domain.dto.UserResponseDto;
-import com.platform.ppdbackend.domain.service.AuthService;
+import com.platform.ppdbackend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

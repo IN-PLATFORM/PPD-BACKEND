@@ -1,4 +1,4 @@
-package com.platform.ppdbackend.domain.util;
+package com.platform.ppdbackend.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

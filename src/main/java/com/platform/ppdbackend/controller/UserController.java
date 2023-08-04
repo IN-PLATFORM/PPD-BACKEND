@@ -1,8 +1,8 @@
-package com.platform.ppdbackend.domain.controller;
+package com.platform.ppdbackend.controller;
 
 import com.platform.ppdbackend.domain.dto.UserResponseDto;
-import com.platform.ppdbackend.domain.service.UserService;
-import com.platform.ppdbackend.domain.util.SecurityUtil;
+import com.platform.ppdbackend.service.UserService;
+import com.platform.ppdbackend.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

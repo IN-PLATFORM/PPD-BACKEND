@@ -1,6 +1,5 @@
 package com.platform.ppdbackend.domain.dto;
 
-import com.platform.ppdbackend.domain.user.Member;
 import com.platform.ppdbackend.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

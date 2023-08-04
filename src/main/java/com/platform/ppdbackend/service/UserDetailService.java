@@ -1,6 +1,7 @@
-package com.platform.ppdbackend.domain.service;
+package com.platform.ppdbackend.service;
 
-import com.platform.ppdbackend.domain.repository.UserRepository;
+import com.platform.ppdbackend.jwt.CustomUserDetails;
+import com.platform.ppdbackend.repository.UserRepository;
 import com.platform.ppdbackend.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,11 +31,10 @@ public class UserDetailService implements UserDetailsService {
     // DB 에 User 값이 존재한다면 UserDetails 객체로 만들어서 리턴
     private UserDetails createUserDetails(User user) {
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getRoleType().toString());
-
-        return new User(
-                String.valueOf(user.getEmail()),
-                user.getPassword(),
-                Collections.singleton(grantedAuthority)
-        );
+        CustomUserDetails customUserDetails = new CustomUserDetails();
+        customUserDetails.setUsername(user.getEmail());
+        customUserDetails.setPassword(user.getPassword());
+        customUserDetails.setAuthorities(Collections.singleton(grantedAuthority));
+        return customUserDetails;
     }
 }

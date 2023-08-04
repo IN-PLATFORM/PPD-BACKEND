@@ -1,6 +1,5 @@
 package com.platform.ppdbackend.domain.dto;
 
-import com.platform.ppdbackend.domain.user.enums.Authority;
 import com.platform.ppdbackend.domain.user.User;
 import com.platform.ppdbackend.domain.user.enums.RoleType;
 import lombok.AllArgsConstructor;

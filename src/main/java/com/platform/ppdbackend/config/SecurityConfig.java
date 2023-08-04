@@ -1,9 +1,9 @@
-package com.platform.ppdbackend.domain.config;
+package com.platform.ppdbackend.config;
 
-import com.platform.ppdbackend.domain.jwt.JwtAccessDeniedHandler;
-import com.platform.ppdbackend.domain.jwt.JwtAuthenticationEntryPoint;
-import com.platform.ppdbackend.domain.jwt.JwtSecurityConfig;
-import com.platform.ppdbackend.domain.jwt.TokenProvider;
+import com.platform.ppdbackend.jwt.JwtAccessDeniedHandler;
+import com.platform.ppdbackend.jwt.JwtAuthenticationEntryPoint;
+import com.platform.ppdbackend.jwt.JwtSecurityConfig;
+import com.platform.ppdbackend.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
