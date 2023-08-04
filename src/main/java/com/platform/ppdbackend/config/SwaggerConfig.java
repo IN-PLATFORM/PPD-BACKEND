@@ -1,4 +1,4 @@
-package com.platform.ppdbackend.domain.config;
+package com.platform.ppdbackend.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;

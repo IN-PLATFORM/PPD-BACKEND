@@ -1,7 +1,7 @@
-package com.platform.ppdbackend.domain.service;
+package com.platform.ppdbackend.service;
 
 import com.platform.ppdbackend.domain.dto.UserResponseDto;
-import com.platform.ppdbackend.domain.repository.UserRepository;
+import com.platform.ppdbackend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

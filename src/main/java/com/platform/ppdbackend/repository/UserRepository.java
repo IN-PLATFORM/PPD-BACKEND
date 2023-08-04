@@ -1,7 +1,6 @@
-package com.platform.ppdbackend.domain.repository;
+package com.platform.ppdbackend.repository;
 
 
-import com.platform.ppdbackend.domain.user.Member;
 import com.platform.ppdbackend.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

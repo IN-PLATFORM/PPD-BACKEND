@@ -1,4 +1,4 @@
-package com.platform.ppdbackend.domain.jwt;
+package com.platform.ppdbackend.jwt;
 
 import com.platform.ppdbackend.domain.dto.TokenDto;
 import io.jsonwebtoken.*;
