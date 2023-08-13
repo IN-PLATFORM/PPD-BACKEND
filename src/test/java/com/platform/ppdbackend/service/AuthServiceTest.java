@@ -57,7 +57,7 @@ class AuthServiceTest {
     @Transactional
     void signup() {
         //given
-        UserRequestDto userRequestDto = new UserRequestDto("test1", "test","2");
+        UserRequestDto userRequestDto = new UserRequestDto("test1", "test",2);
 
         User user = userRequestDto.toUser(passwordEncoder);
         UserResponseDto userResponseDto = UserResponseDto.of(userRepository.save(user));
