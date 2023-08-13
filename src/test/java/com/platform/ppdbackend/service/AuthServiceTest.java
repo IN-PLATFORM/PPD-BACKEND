@@ -7,6 +7,7 @@ import com.platform.ppdbackend.repository.RefreshTokenRepository;
 import com.platform.ppdbackend.repository.UserRepository;
 import com.platform.ppdbackend.domain.user.RefreshToken;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,7 +32,21 @@ class AuthServiceTest {
     private  TokenProvider tokenProvider;
     @Autowired
     private  RefreshTokenRepository refreshTokenRepository;
+    @Autowired
+    private AuthService authService;
 
+    @Test
+    void userEmailChk(){
+        //given
+        String email = "juju";
+
+        //when
+        int result = authService.userEmailChk(email);
+
+        //then
+        Assertions.assertEquals(result, 1);
+
+    }
     @Test
     void login() {
         //given

@@ -30,12 +30,16 @@ public class AuthService {
 
     @Transactional
     public UserResponseDto signup(UserRequestDto userRequestDto) {
-        if (userRepository.existsByEmail(userRequestDto.getEmail())) {
-            throw new RuntimeException("이미 가입되어 있는 유저입니다");
-        }
-
         User user = userRequestDto.toUser(passwordEncoder);
         return UserResponseDto.of(userRepository.save(user));
+    }
+
+    // 아이디 중복 확인
+    public int userEmailChk(String email) {
+        if (userRepository.existsByEmail(email)) {
+            return 1; // 이미 존재할 경우
+        }
+        return 0;
     }
 
     @Transactional
