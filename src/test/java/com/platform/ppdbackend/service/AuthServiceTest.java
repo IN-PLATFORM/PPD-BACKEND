@@ -3,10 +3,13 @@ package com.platform.ppdbackend.service;
 import com.platform.ppdbackend.domain.dto.LoginDto;
 import com.platform.ppdbackend.domain.dto.TokenDto;
 import com.platform.ppdbackend.domain.dto.UserRequestDto;
+import com.platform.ppdbackend.domain.dto.UserResponseDto;
+import com.platform.ppdbackend.domain.user.User;
 import com.platform.ppdbackend.jwt.TokenProvider;
 import com.platform.ppdbackend.repository.RefreshTokenRepository;
 import com.platform.ppdbackend.repository.UserRepository;
 import com.platform.ppdbackend.domain.user.RefreshToken;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -37,21 +40,44 @@ class AuthServiceTest {
     private AuthService authService;
 
     @Test
+    @Transactional
     void userEmailChk(){
         //given
-        String email = "juju";
+        UserRequestDto userRequestDto = new UserRequestDto("test1", "test",1);
+        UserResponseDto savedDto = authService.signup(userRequestDto);
 
         //when
-        int result = authService.userEmailChk(email);
+        int result = authService.userEmailChk(savedDto.getEmail());
 
         //then
         Assertions.assertEquals(result, 1);
 
     }
     @Test
+    @Transactional
+    void signup() {
+        //given
+        UserRequestDto userRequestDto = new UserRequestDto("test1", "test","2");
+
+        User user = userRequestDto.toUser(passwordEncoder);
+        UserResponseDto userResponseDto = UserResponseDto.of(userRepository.save(user));
+
+
+        //then
+        assertTrue(authService.userEmailChk(userRequestDto.getEmail()) == 1);
+        assertTrue(userResponseDto != null);
+        assertSame(userRequestDto.getEmail(), userResponseDto.getEmail());
+
+
+    }
+    @Test
+    @Transactional
     void login() {
         //given
-        LoginDto loginDto = new LoginDto("jjj","2967");
+        UserRequestDto userRequestDto = new UserRequestDto("test1", "test",1);
+        UserResponseDto savedDto = authService.signup(userRequestDto);
+
+        LoginDto loginDto = new LoginDto(userRequestDto.getEmail(), userRequestDto.getPassword());
         //when
         UsernamePasswordAuthenticationToken authenticationToken = loginDto.toAuthentication();
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
@@ -68,5 +94,7 @@ class AuthServiceTest {
         assertSame(authenticationToken.getName(),loginDto.getEmail());
         assertTrue(!tokenDto.getAccessToken().isEmpty());
         assertTrue(authentication.isAuthenticated());
+
+
     }
 }
