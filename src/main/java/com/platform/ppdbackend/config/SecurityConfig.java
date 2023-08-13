@@ -1,11 +1,7 @@
 package com.platform.ppdbackend.config;
 
-import com.platform.ppdbackend.jwt.JwtAccessDeniedHandler;
-import com.platform.ppdbackend.jwt.JwtAuthenticationEntryPoint;
-import com.platform.ppdbackend.jwt.JwtSecurityConfig;
-import com.platform.ppdbackend.jwt.TokenProvider;
+import com.platform.ppdbackend.jwt.*;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,13 +11,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig {
     private final TokenProvider tokenProvider;
-    private final CorsConfig corsConfig;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
@@ -33,17 +29,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // CSRF 설정 Disable
-        http.csrf()
-            .disable()
-            .addFilterBefore(corsConfig.corsFilter(), UsernamePasswordAuthenticationFilter.class).exceptionHandling()
+        http
+            .csrf().disable()
+            .exceptionHandling()
             .authenticationEntryPoint(jwtAuthenticationEntryPoint)
             .accessDeniedHandler(jwtAccessDeniedHandler)
-
-            .and()
-            .headers()
-            .frameOptions()
-            .sameOrigin()
 
             // 시큐리티는 기본적으로 세션을 사용
             // 여기서는 세션을 사용하지 않기 때문에 세션 설정을 Stateless 로 설정
@@ -54,6 +44,7 @@ public class SecurityConfig {
             // 로그인, 회원가입 API 는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll 설정
             .and()
             .authorizeHttpRequests()
+            .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
             .requestMatchers("/api/auth/**").permitAll()
             .requestMatchers("/**").permitAll()
             .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
