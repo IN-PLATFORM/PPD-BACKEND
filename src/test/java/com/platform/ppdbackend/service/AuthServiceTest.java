@@ -1,5 +1,6 @@
 package com.platform.ppdbackend.service;
 
+import com.platform.ppdbackend.domain.dto.LoginDto;
 import com.platform.ppdbackend.domain.dto.TokenDto;
 import com.platform.ppdbackend.domain.dto.UserRequestDto;
 import com.platform.ppdbackend.jwt.TokenProvider;
@@ -50,9 +51,9 @@ class AuthServiceTest {
     @Test
     void login() {
         //given
-        UserRequestDto userRequestDto = new UserRequestDto("jjj","2967");
+        LoginDto loginDto = new LoginDto("jjj","2967");
         //when
-        UsernamePasswordAuthenticationToken authenticationToken = userRequestDto.toAuthentication();
+        UsernamePasswordAuthenticationToken authenticationToken = loginDto.toAuthentication();
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);
 
@@ -64,7 +65,7 @@ class AuthServiceTest {
         refreshTokenRepository.save(refreshToken);
 
         //then
-        assertSame(authenticationToken.getName(),userRequestDto.getEmail());
+        assertSame(authenticationToken.getName(),loginDto.getEmail());
         assertTrue(!tokenDto.getAccessToken().isEmpty());
         assertTrue(authentication.isAuthenticated());
     }

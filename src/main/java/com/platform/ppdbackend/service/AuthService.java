@@ -1,9 +1,6 @@
 package com.platform.ppdbackend.service;
 
-import com.platform.ppdbackend.domain.dto.TokenDto;
-import com.platform.ppdbackend.domain.dto.TokenRequestDto;
-import com.platform.ppdbackend.domain.dto.UserRequestDto;
-import com.platform.ppdbackend.domain.dto.UserResponseDto;
+import com.platform.ppdbackend.domain.dto.*;
 import com.platform.ppdbackend.domain.user.RefreshToken;
 import com.platform.ppdbackend.jwt.TokenProvider;
 import com.platform.ppdbackend.repository.UserRepository;
@@ -43,9 +40,9 @@ public class AuthService {
     }
 
     @Transactional
-    public TokenDto login(UserRequestDto memberRequestDto) {
+    public TokenDto login(LoginDto loginDto) {
         // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
-        UsernamePasswordAuthenticationToken authenticationToken = memberRequestDto.toAuthentication();
+        UsernamePasswordAuthenticationToken authenticationToken = loginDto.toAuthentication();
         // 2. 실제로 검증 (사용자 비밀번호 체크) 이 이루어지는 부분
         //    authenticate 메서드가 실행이 될 때 CustomUserDetailsService 에서 만들었던 loadUserByUsername 메서드가 실행됨
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
