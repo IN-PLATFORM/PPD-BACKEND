@@ -1,9 +1,6 @@
 package com.platform.ppdbackend.controller;
 
-import com.platform.ppdbackend.domain.dto.TokenDto;
-import com.platform.ppdbackend.domain.dto.TokenRequestDto;
-import com.platform.ppdbackend.domain.dto.UserRequestDto;
-import com.platform.ppdbackend.domain.dto.UserResponseDto;
+import com.platform.ppdbackend.domain.dto.*;
 import com.platform.ppdbackend.error.Message;
 import com.platform.ppdbackend.error.StatusEnum;
 import com.platform.ppdbackend.service.AuthService;
@@ -46,11 +43,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Message> login(@RequestBody UserRequestDto userRequestDto) {
+    public ResponseEntity<Message> login(@RequestBody LoginDto loginDto) {
         Message message = new Message();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application","json", Charset.forName("UTF-8")));
-        TokenDto tokenDto = authService.login(userRequestDto);
+        TokenDto tokenDto = authService.login(loginDto);
         if(tokenDto != null){
             message.setStatus(StatusEnum.OK);
             message.setMessage("로그인이 완료되었습니다.");
