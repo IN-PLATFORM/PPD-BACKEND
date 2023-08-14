@@ -1,12 +1,10 @@
 package com.platform.ppdbackend.domain.dto;
 
-import com.platform.ppdbackend.domain.dto.UserRequestDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Set;
 
@@ -49,6 +47,6 @@ public class UserRequestDtoTest {
         assertTrue(violations.stream().anyMatch(violation -> "이름은 필수 입력 값입니다.".equals(violation.getMessage())));
         assertTrue(violations.stream().anyMatch(violation -> "이메일 형식에 맞지 않습니다.".equals(violation.getMessage())));
         assertTrue(violations.stream().anyMatch(violation -> "비밀번호는 필수 입력 값입니다.".equals(violation.getMessage())));
-        assertTrue(violations.stream().anyMatch(violation -> "나이는 0 이상이어야 합니다.".equals(violation.getMessage())));
+        assertTrue(violations.stream().anyMatch(violation -> "나이는 1 이상이어야 합니다.".equals(violation.getMessage())));
     }
 }

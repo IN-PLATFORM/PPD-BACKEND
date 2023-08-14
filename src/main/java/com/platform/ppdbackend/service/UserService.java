@@ -1,5 +1,6 @@
 package com.platform.ppdbackend.service;
 
+import com.platform.ppdbackend.domain.dto.UserInfoDto;
 import com.platform.ppdbackend.domain.dto.UserResponseDto;
 import com.platform.ppdbackend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public UserResponseDto findUserInfoById(Long memberId) {
-        return userRepository.findById(memberId)
-                .map(UserResponseDto::of)
+    public UserInfoDto findUserInfoByHeader(String email) {
+        return userRepository.findByEmail(email)
+                .map(UserInfoDto::of)
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
     }
 
