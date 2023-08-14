@@ -46,7 +46,8 @@ public class SecurityConfig {
             .authorizeHttpRequests()
             .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
             .requestMatchers("/api/auth/**").permitAll()
-            .requestMatchers("/**").permitAll()
+            .requestMatchers("/swagger-ui/**").permitAll()
+            .requestMatchers("/v3/api-docs/**").permitAll()
             .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
 
             // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
