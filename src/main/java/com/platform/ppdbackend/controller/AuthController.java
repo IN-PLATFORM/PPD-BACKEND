@@ -4,6 +4,7 @@ import com.platform.ppdbackend.domain.dto.*;
 import com.platform.ppdbackend.error.Message;
 import com.platform.ppdbackend.error.StatusEnum;
 import com.platform.ppdbackend.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Message> signup(@RequestBody UserRequestDto userRequestDto) {
+    public ResponseEntity<Message> signup(@RequestBody @Valid UserRequestDto userRequestDto) {
         Message message = new Message();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application","json", Charset.forName("UTF-8")));

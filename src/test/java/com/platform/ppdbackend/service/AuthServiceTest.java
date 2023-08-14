@@ -43,7 +43,7 @@ class AuthServiceTest {
     @Transactional
     void userEmailChk(){
         //given
-        UserRequestDto userRequestDto = new UserRequestDto("test1", "test",1);
+        UserRequestDto userRequestDto = new UserRequestDto("ju","test1@rs", "test",1);
         UserResponseDto savedDto = authService.signup(userRequestDto);
 
         //when
@@ -57,7 +57,7 @@ class AuthServiceTest {
     @Transactional
     void signup() {
         //given
-        UserRequestDto userRequestDto = new UserRequestDto("test1", "test",2);
+        UserRequestDto userRequestDto = new UserRequestDto("ju","test1@rs", "test",2);
 
         User user = userRequestDto.toUser(passwordEncoder);
         UserResponseDto userResponseDto = UserResponseDto.of(userRepository.save(user));
@@ -74,7 +74,7 @@ class AuthServiceTest {
     @Transactional
     void login() {
         //given
-        UserRequestDto userRequestDto = new UserRequestDto("test1", "test",1);
+        UserRequestDto userRequestDto = new UserRequestDto("ju","test1", "test",1);
         UserResponseDto savedDto = authService.signup(userRequestDto);
 
         LoginDto loginDto = new LoginDto(userRequestDto.getEmail(), userRequestDto.getPassword());
