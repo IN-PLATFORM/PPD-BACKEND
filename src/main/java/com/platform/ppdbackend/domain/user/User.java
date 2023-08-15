@@ -47,7 +47,7 @@ public class User extends BaseTimeEntity {
     private LocalDateTime lastLoginDate;
 
     // Joint : User = N : 1 관계
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
     private List<Joint> joints = new ArrayList<>(); // joints 필드가 Joint 엔티티의 user 필드에 의해 매핑 되었다.
 
     @Builder
