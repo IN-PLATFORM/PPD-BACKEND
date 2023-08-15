@@ -28,4 +28,11 @@ public class Speed extends BaseTimeEntity {
     // 읽기 전용
     @OneToOne(mappedBy = "speed") // Joint 엔티티에 있는 speed 필드와 매핑되었다.
     private Joint joint;
+
+    public Speed(Float actual_value, Float normal_value, Float abnormal_value, ResultType resultType) {
+        this.actual_value = actual_value;
+        this.normal_value = normal_value;
+        this.abnormal_value = abnormal_value;
+        this.resultType = resultType;
+    }
 }

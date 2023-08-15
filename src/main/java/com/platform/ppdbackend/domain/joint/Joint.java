@@ -9,7 +9,9 @@ import com.platform.ppdbackend.domain.user.enums.RoleType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
 @Getter
 @NoArgsConstructor
 @Entity
@@ -28,27 +30,27 @@ public class Joint extends BaseTimeEntity {
     private ResultType resultType; // 각 사용자의 결과상태(정상/비정상)을 관리할 Enum class
 
     // 6가지 특성 1:1매칭
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="speed_idx")
     private Speed speed;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="ankles_idx")
     private Ankles ankles;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="knee_idx")
     private Knee knee;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="angle_idx")
     private AngleChange angleChange;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="back_idx")
     private BackAngle backAngle;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="arm_idx")
     private ArmAngle armAngle;
 
