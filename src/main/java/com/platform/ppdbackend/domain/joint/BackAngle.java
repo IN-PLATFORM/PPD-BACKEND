@@ -29,4 +29,11 @@ public class BackAngle extends BaseTimeEntity {
     // 읽기 전용
     @OneToOne(mappedBy = "backAngle") // Joint 엔티티에 있는 angleChange 필드와 매핑되었다.
     private Joint joint;
+
+    public BackAngle(Float actual_value, Float normal_value, Float abnormal_value, ResultType resultType) {
+        this.actual_value = actual_value;
+        this.normal_value = normal_value;
+        this.abnormal_value = abnormal_value;
+        this.resultType = resultType;
+    }
 }
