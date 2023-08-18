@@ -3,6 +3,8 @@ package com.platform.ppdbackend.domain.user;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.platform.ppdbackend.domain.BaseTimeEntity;
+import com.platform.ppdbackend.domain.dto.UserInfoDto;
+import com.platform.ppdbackend.domain.dto.UserUpdateDto;
 import com.platform.ppdbackend.domain.joint.Joint;
 import com.platform.ppdbackend.domain.user.enums.GenderType;
 import com.platform.ppdbackend.domain.user.enums.InfoStatus;
@@ -62,5 +64,12 @@ public class User extends BaseTimeEntity {
         this.info = info;
         this.lastLoginDate = lastLoginDate;
     }
+
+    public void update(UserUpdateDto userUpdateDto) {
+        this.email = userUpdateDto.getEmail();
+        this.name = userUpdateDto.getName();
+        this.age = userUpdateDto.getAge();
+    }
+
 }
 
